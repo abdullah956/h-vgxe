@@ -1,0 +1,74 @@
+from IPython.display import clear_output
+!pip install tf_explain
+! pip install segmentation-models
+clear_output()
+from tf_explain.core.grad_cam import GradCAM
+
+
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import os
+%matplotlib inline
+
+import tensorflow as tf
+from skimage.color import rgb2gray
+from tensorflow.keras import Input
+from tensorflow.keras.models import Model, load_model, save_model
+from tensorflow.keras.layers import Input, Activation, BatchNormalization, Dropout, Lambda, Conv2D, Conv2DTranspose, MaxPooling2D, concatenate, Flatten, Dense, Reshape, Multiply, Add,UpSampling2D
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+
+
+import tensorflow as tf
+from keras import regularizers
+from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img
+from tensorflow.keras.layers import Dense, Input, Dropout,Flatten, Conv2D
+from tensorflow.keras.layers import BatchNormalization, Activation, MaxPooling2D
+from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau
+from tensorflow.keras.utils import plot_model
+
+from IPython.display import SVG, Image
+# from livelossplot import PlotLossesTensorFlowKeras
+print("Tensorflow version:", tf.__version__)
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import os,cv2
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+from pylab import rcParams
+rcParams['figure.figsize'] = 20, 10
+
+from sklearn.utils import shuffle
+from sklearn.model_selection import train_test_split
+
+data_path = 'dataset'
+data_dir_list = os.listdir(data_path)
+
+img_rows=256
+img_cols=256
+num_channel=1
+
+num_epoch=10
+
+img_data_list=[]
+
+
+for dataset in data_dir_list:
+    img_list=os.listdir(data_path+'/'+ dataset)
+    print ('Loaded the images of dataset-'+'{}\n'.format(dataset))
+    for img in img_list:
+        input_img=cv2.imread(data_path + '/'+ dataset + '/'+ img )
+        #input_img=cv2.cvtColor(input_img, cv2.COLOR_BGR2GRAY)
+        input_img_resize=cv2.resize(input_img,(48,48))
+        img_data_list.append(input_img_resize)
+        
+img_data = np.array(img_data_list)
+img_data = img_data.astype('float32')
+img_data = img_data/255
+img_data.shape
+

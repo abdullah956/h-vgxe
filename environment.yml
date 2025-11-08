@@ -1,0 +1,21 @@
+name: facial
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - tensorflow==2.6.4
+    - numpy
+    - pandas
+    - matplotlib
+    - seaborn
+    - scikit-learn
+    - scikit-image
+    - opencv-python
+    - jupyter
+    - ipykernel
+    - tf-explain
+    - segmentation-models
+    - keras
+
